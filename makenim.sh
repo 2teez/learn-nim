@@ -38,6 +38,7 @@ optstring="c:g:r:h"
 while getopts "${optstring}" opt; do
     case "$opt" in
         c)
+            echo "compiling nim file"
             ;;
         g)
             # create a generic nim file
@@ -47,7 +48,24 @@ while getopts "${optstring}" opt; do
         r)
             # run a filename
             filename="${OPTARG}"
-            nim r "${filename}"
+            while read -p "Hints ON or OFF: [o|f]> " -r ans; do
+               case "${ans}" in
+                   [oO])
+                        nim r "${filename}"
+                        # delete the cache afterwards
+                        rm -rf ~/.cache/nim/"${filename%.*}_d"
+                        exit
+                       ;;
+                    [fF])
+                        nim r --hints:off "${filename}"
+                        # delete the cache afterwards
+                        rm -rf ~/.cache/nim/"${filename%.*}_d"
+                        exit
+                       ;;
+                    *) echo "invalid option. Can only use: o for 'On', and f for 'Off'"
+                       ;;
+                esac
+            done
             ;;
         h)
             ;;
