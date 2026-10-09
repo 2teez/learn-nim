@@ -3,6 +3,7 @@
 # author: omitida
 # Description: Makefile for nim programming language
 #
+filename=
 function help() {
     echo "Usage: ./makenim -<option> <filename>"
     echo "Available Options"
@@ -15,14 +16,17 @@ function help() {
 }
 
 function remove_ext() {
-    file="${1}"
-    file_extension="${file#.*}"
-    filename="${file*.}"
-    echo "${filename}" "${file_extension}" "${file}"
+    filename="${1}"
+    file_extension="${filename##*.}"
+    if [ "${file_extension}" != "nim" ]; then
+        filename="${filename%.*}.nim"
+    fi
 }
 
 function create_nim_file() {
-    echo ""
+    filename="${1}"
+    remove_ext "${filename}"
+    echo "echo \"Hello, World\"" > "${filename}"
 }
 
 if [ "$#" -ne 2 ]; then
@@ -36,6 +40,9 @@ while getopts "${optstring}" opt; do
         c)
             ;;
         g)
+            # create a generic nim file
+            filename="${OPTARG}"
+            create_nim_file "${filename}"
             ;;
         r)
             ;;
