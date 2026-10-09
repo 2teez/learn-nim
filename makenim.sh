@@ -44,6 +44,9 @@ while getopts "${optstring}" opt; do
             # create a generic nim file
             filename="${OPTARG}"
             create_nim_file "${filename}"
+            nim r "${filename}"
+            # delete the cache afterwards
+            rm -rf ~/.cache/nim/"${filename%.*}_d"
             ;;
         r)
             # run a filename
