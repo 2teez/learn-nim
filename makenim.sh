@@ -45,6 +45,9 @@ while getopts "${optstring}" opt; do
             create_nim_file "${filename}"
             ;;
         r)
+            # run a filename
+            filename="${OPTARG}"
+            nim r "${filename}"
             ;;
         h)
             ;;
