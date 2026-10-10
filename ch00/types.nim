@@ -6,9 +6,9 @@ proc bark(self: Dog) =
   echo("Woof!")
 
 let dog = Dog(age: 3)
-echo(dog)
+echo "Dog", dog, ""
 dog.bark()
-
+bark(dog)
 
 proc showNumber(num: int | float) =
   echo(num)
