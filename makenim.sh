@@ -71,6 +71,7 @@ while getopts "${optstring}" opt; do
             done
             ;;
         h)
+            help; exit
             ;;
         *)
             echo "Invalid option"
