@@ -34,3 +34,11 @@ const multiples = @[4, 16, 32, 64, 128, 256, 528]
 for num in 0..<multiples.len:
   stdout.write($num & ": " & $multiples[num] & "; ")
 echo ""
+
+# using set in nim
+
+var collection: set[int16]
+assert collection == {}
+
+let letterCollections = {'a', 'x', 'r'}
+assert 'a' in letterCollections
