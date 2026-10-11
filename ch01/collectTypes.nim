@@ -42,3 +42,20 @@ assert collection == {}
 
 let letterCollections = {'a', 'x', 'r'}
 assert 'a' in letterCollections
+
+# using an iterator in nim
+iterator values(start = 0, stop = 5, step = 1): int =
+  var
+    starter = start
+    stopper = stop
+    stepper = step
+  while(starter < stopper):
+    yield starter
+    starter.inc(stepper)
+
+for value in values(): echo value
+for value in values(-9, 20, 3): echo value
+
+import os
+for file in walkFiles("*.nim"):
+  stdout.write("File named: " & file & "\n")
