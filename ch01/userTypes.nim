@@ -34,3 +34,20 @@ proc calulateDistance(pt: Point, pt2: Point2): float =
   sqrt((y1-y) ^ 2 + (x1-x) ^ 2)
 
 calulateDistance((x: 1'f32, y: 3'f32), (x: 5'f32, y: 6'f32)).echo
+
+
+# using enum in nim
+#
+type
+  Color = enum
+    colRed,
+    colOrange,
+    colGreen
+
+let color: Color = colGreen
+let action = case color:
+  of colRed: "Stop"
+  of colOrange: "Ready to Stop"
+  of colGreen: "Go..."
+
+action.echo
