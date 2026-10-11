@@ -36,5 +36,15 @@ assert oddNumbersAnon == answer
 
 # 3.
 # using a syntax sugar
+# note: (x: int) -> bool => ...., can be written as x -> x => ...
 let oddNumbersAnon2 = filter(numbers, (x) -> bool => x mod 2 != 0)
 doAssert oddNumbersAnon2 == answer
+
+const isPrime =
+  proc (x: int): bool =
+    for val in 2..<x:
+      if x mod val == 0:
+        return false
+    true
+
+assert 6.isPrime == false
