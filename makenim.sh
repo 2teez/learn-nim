@@ -33,7 +33,7 @@ if [ "$#" -ne 2 ]; then
  help; exit;
 fi
 
-optstring="c:g:r:h"
+optstring="c:g:r:p:h"
 
 while getopts "${optstring}" opt; do
     case "$opt" in
@@ -69,6 +69,19 @@ while getopts "${optstring}" opt; do
                        ;;
                 esac
             done
+            ;;
+        p)
+            echo "Creating a project.."
+            directory="${OPTARG}"
+            mkdir "${directory}"
+            cd "${directory}" || exit 1
+            mkdir src bin images tests
+            touch tests/generictest.nim
+            # change and make
+            cd src || exit 1
+            create_nim_file  main.nim
+            nim c -r main.nim
+            mv main ../bin/
             ;;
         h)
             help; exit
