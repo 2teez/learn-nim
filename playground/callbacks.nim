@@ -4,7 +4,10 @@ var filename = ""
 if paramCount() == 0:
   while true:
     echo("/etc/passwd - would be assign to your filename. [y|n]")
-    let answer = spawn stdin.readLine().toLower()
+
+    # leave the spawn from threadpool in the code below
+    # for learning reason
+    let answer = spawn stdin.readLine().strip().toLowerAscii()
     case ^answer:
     of "n":
       quit("Usaage: " & getAppFilename() & " <filename>")
