@@ -12,3 +12,13 @@ type
     clients: seq[Client]
 
 proc newServer(): Server = Server(socket: newAsyncSocket(), clients: @[])
+
+proc loop(server: Server, port = 7687) {.async.} =
+  server.socket.bindAddr(port.Port)
+  server.socket.listen()
+
+  while true:
+    let clientSocket = await server.socket.accept()
+    echo("Accept Connection!")
+
+  waitFor loop(server)
