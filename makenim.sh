@@ -26,7 +26,13 @@ function remove_ext() {
 function create_nim_file() {
     filename="${1}"
     remove_ext "${filename}"
-    echo "echo \"Hello, World\"" > "${filename}"
+echo "import sugar
+
+const main = () => echo \"Hello, World\"
+
+when isMainModule:
+  main()
+" > "${filename}"
 }
 
 if [ "$#" -ne 2 ]; then
