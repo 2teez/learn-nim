@@ -1,11 +1,11 @@
-import tables, hashes
+import tables, hashes, sets
 
 type
   Dog = object
     name: string
+
 # give a hash proc to make the new type Dog
 # hashable to use as a key in table
-
 proc hash(dog: Dog): Hash =
   result = dog.name.hash
   result = !$result
@@ -27,6 +27,13 @@ proc main() =
   dogOwners[Dog(name: "Bingo")] = "Obi"
 
   dogOwners.echo
+
+  # using sets from hashes
+  var accessSets = toSet(["java", "go", "nim", "perl"])
+  if "javascript" notin accessSets:
+    echo("Access Denied!")
+  else:
+    echo("Access Granted..")
 
 when isMainModule:
   main()
