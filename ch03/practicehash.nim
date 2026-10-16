@@ -1,4 +1,6 @@
-import tables, hashes, sets
+import tables, hashes, sets,
+  algorithm
+
 
 type
   Dog = object
@@ -34,6 +36,16 @@ proc main() =
     echo("Access Denied!")
   else:
     echo("Access Granted..")
+
+  # use sort and sorted; sort work in place
+  # while sorted return sorted values leaving
+  # the values in it original forms
+  var ages = @[34, 10, 12, 43, 5, 15]
+  ages.sort(system.cmp[int])
+  ages.echo
+
+  let names = @["java", "python", "nim", "c#", "c"]
+  names.sorted(system.cmp[string]).echo
 
 when isMainModule:
   main()
